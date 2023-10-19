@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import './styles.css';
+import './stylesBanner.css';
 
 // import required modules
 import { Pagination, Autoplay } from 'swiper/modules';
@@ -24,7 +24,7 @@ const Banner = () => {
                         disableOnInteraction: false,
                     }}
                     modules={[Autoplay, Pagination]}
-                    className="mySwiper"
+                    className="mySwiper swiper-banner"
                 >
                     <SwiperSlide className='relative '>
                         <img src="https://i.ibb.co/vBhzdFg/car-2.jpg" />

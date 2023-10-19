@@ -6,7 +6,7 @@ const Testimonial = () => {
     return (
         <div>
             <div className="text-center my-5">
-                <p className="font-semibold text-2xl">Our Happy Clients</p>
+                <p className="font-semibold text-sm sm:text-base md:text-2xl ">Our Happy Clients</p>
             </div>
             <Marquee pauseOnHover={true}>
                 <div className="flex flex-col justify-between items-center  p-5 border-2 rounded-md drop-shadow-2xl m-5 h-96">
