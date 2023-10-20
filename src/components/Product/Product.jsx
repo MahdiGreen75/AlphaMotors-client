@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { GenericContext } from "../../providers/GenericValueProvider";
 
 const Product = ({ product }) => {
-    const navigate = useNavigate();
+
     const [xdetails, setSDetails] = useContext(GenericContext);
     const { brand_name, name, price, rating, type, _id, details } = product;
-    // console.log(details)
+    // console.log(_id)
     setSDetails(details);
     return (
         <div>

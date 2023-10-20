@@ -1,9 +1,17 @@
+import { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Update = () => {
+    const { id } = useParams();
     const [selectedValue, setSelectedValue] = useState('apple'); // Initial selected value
     const [selectedBrand, setSelectedBrand] = useState('Ford'); // Initial selected value
 
+
+
+    // const notify = () => toast('Here is your toast.')
+    // console.log(id);
     const handleSelectChange = (event) => {
         setSelectedValue(event.target.value);
     };
@@ -13,8 +21,36 @@ const Update = () => {
     }
 
     const hadleForm = (e) => {
+        e.preventDefault();
         const form = e.target;
+        const productImg = form.productImg.value;
+        const productName = form.productName.value;
+        const brandName = selectedBrand;
+        const typeName = selectedValue;
+        const productPrice = form.productPrice.value;
+        const productRating = form.rating.value;
+
+        const updatedUser = { productImg, productName, brandName, typeName, productPrice, productRating };
+
+        fetch(`http://localhost:5000/updates/${id}`, {
+            method: 'PATCH',
+            headers: {
+                "content-type": 'application/json'
+            },
+            body: JSON.stringify(updatedUser)
+        }).then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success("Üpdate Successfull");
+                }
+            })
+
+
     }
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <div>
@@ -81,6 +117,7 @@ const Update = () => {
 
 
             </div>
+            <Toaster></Toaster>
         </div>
     );
 };
