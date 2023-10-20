@@ -10,6 +10,7 @@ import SectionBody from './components/SectionBody/SectionBody';
 import ProductDetails from './components/routes/ProductDetails';
 import DetailsOfButton from './components/routes/DetailsOfButton';
 import GenericValueProvider from './providers/GenericValueProvider';
+import Update from './components/routes/Update';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
         element: <ProductDetails></ProductDetails>
       },
       {
-        path: "/products/details/:id",
+        path: "/details/:id",
         element: <DetailsOfButton></DetailsOfButton>
+      },
+      {
+        path: "/update/:id",
+        element: <Update></Update>
       }
 
     ]

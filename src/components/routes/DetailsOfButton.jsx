@@ -13,12 +13,13 @@ import { ImLifebuoy } from "react-icons/im"
 import { FcBiotech } from "react-icons/fc"
 import { GiHeartInside } from "react-icons/gi"
 import { TbLayoutSidebarRightExpand } from "react-icons/tb"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
 const DetailsOfButton = () => {
     const [detials] = useContext(GenericContext);
+    const navigate = useNavigate(); 
 
     const addToCart = () => {
         fetch("http://localhost:5000/carts", {
@@ -127,7 +128,7 @@ const DetailsOfButton = () => {
                     <button className="text-white font-sm font-semibold bg-blue-500 duration-300  hover:bg-blue-700 active:bg-blue-900 rounded-md px-3 py-1">Add to cart</button>
                 </Link>
                 <span>
-                    <button onClick={addToCart} className="text-white font-sm font-semibold bg-blue-500 duration-300  hover:bg-blue-700 active:bg-blue-900 rounded-md px-3 py-1">Go back</button>
+                    <button onClick={()=>{navigate(-1)}} className="text-white font-sm font-semibold bg-blue-500 duration-300  hover:bg-blue-700 active:bg-blue-900 rounded-md px-3 py-1">Go back</button>
                 </span>
             </div>
         </>
