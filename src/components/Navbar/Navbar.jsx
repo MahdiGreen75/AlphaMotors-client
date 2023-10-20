@@ -27,17 +27,20 @@ const Navbar = () => {
                                 {
                                     !toggleHamburger && <>
                                         <nav className='absolute top-12 right-0 bg-blue-500 p-4 rounded-md mr-1 mt-2 duration-500 drop-shadow-2xl'>
-                                            <ul className='space-y-2 text-xs text-white font-semibold'>
-                                                <li>
-                                                    <NavLink>Home</NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink>Add Product</NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink>My Cart</NavLink>
-                                                </li>
-                                            </ul>
+                                            <nav id="sidebar" className='space-y-2 text-xs text-white font-semibold'>
+
+                                                <NavLink to="/">Home</NavLink>
+
+
+                                                <NavLink>Add Product</NavLink>
+
+
+                                                <NavLink>My Cart</NavLink>
+
+
+                                                <NavLink to="/signup">Register</NavLink>
+
+                                            </nav>
                                         </nav>
                                     </>
                                 }

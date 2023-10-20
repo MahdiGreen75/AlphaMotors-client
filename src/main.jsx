@@ -11,6 +11,10 @@ import ProductDetails from './components/routes/ProductDetails';
 import DetailsOfButton from './components/routes/DetailsOfButton';
 import GenericValueProvider from './providers/GenericValueProvider';
 import Update from './components/routes/Update';
+import AuthProvider from './providers/AuthProvider';
+import Login from './components/routes/Login';
+import SignUp from './components/routes/SignUp';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,16 +35,25 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <Update></Update>
+      },
+      {
+        path: "/login",
+        element: <Login></Login>
+      },
+      {
+        path: "signup",
+        element: <SignUp></SignUp>
       }
-
     ]
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <GenericValueProvider>
-      <RouterProvider router={router} />
-    </GenericValueProvider>
+    <AuthProvider>
+      <GenericValueProvider>
+        <RouterProvider router={router} />
+      </GenericValueProvider>
+    </AuthProvider>
   </React.StrictMode>,
 )
