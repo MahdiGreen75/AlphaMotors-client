@@ -7,6 +7,9 @@ import {
 } from "react-router-dom";
 import Home from './components/routes/Home.jsx';
 import SectionBody from './components/SectionBody/SectionBody';
+import ProductDetails from './components/routes/ProductDetails';
+import DetailsOfButton from './components/routes/DetailsOfButton';
+import GenericValueProvider from './providers/GenericValueProvider';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,13 +18,24 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <SectionBody></SectionBody>
+      },
+      {
+        path: "/service/:id",
+        element: <ProductDetails></ProductDetails>
+      },
+      {
+        path: "/products/details/:id",
+        element: <DetailsOfButton></DetailsOfButton>
       }
+
     ]
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <GenericValueProvider>
+      <RouterProvider router={router} />
+    </GenericValueProvider>
   </React.StrictMode>,
 )
