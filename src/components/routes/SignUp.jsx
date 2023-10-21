@@ -2,14 +2,13 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { ImCross } from 'react-icons/im';
-import { FormValidationContext } from "../../Providers/FormValidationProvider";
+import { FormValidationContext } from "../../providers/FormValidationProvider";
 import { updateProfile } from "firebase/auth";
 import toast, { Toaster } from 'react-hot-toast';
 
 const SignUp = () => {
     const [validataion, setValidation] = useContext(FormValidationContext);
     const { userSignUp, loading } = useContext(AuthContext);
-    // const { user } = useContext(AuthContext);
 
 
     const onSubmitHandler = (e) => {
@@ -78,10 +77,7 @@ const SignUp = () => {
             {/*SignUp Form  */}
             <div className="drop-shadow-2xl flex justify-center mx-auto">
                 <div>
-                    <img className="w-80  rounded-l-md" src={"https://i.ibb.co/b6YSxsb/register-1.jpg"} />
-                </div>
-                <div>
-                    <div className="h-full w-80 p-5 bg-white border rounded-r-md shadow-2xl space-y-5">
+                    <div className="h-full w-80 p-5 bg-white border rounded-md shadow-2xl space-y-5">
                         <h1 className="text-center font-semibold text-xl">Sign Up</h1>
                         <form className="space-y-2" onSubmit={onSubmitHandler}>
                             <div>
@@ -119,7 +115,6 @@ const SignUp = () => {
                             </Link>
                         </p>
                         <p>
-                            {/* Showing error for validation*/}
                             {(validataion) && <>
                                 <p className="text-center flex gap-1 items-center text-red-300 font-semibold text-xs w-max">
                                     <ImCross></ImCross> <span>{validataion}</span>

@@ -1,18 +1,17 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from 'react-hot-toast';
+// import { useNavigate, useParams } from "react-router-dom";
+// import toast, { Toaster } from 'react-hot-toast';
 
 const Update = () => {
-    const navigate = useNavigate();
-    const { id } = useParams();
+    // const navigate = useNavigate();
+    // const { id } = useParams();
     const [selectedValue, setSelectedValue] = useState('Sedan'); // Initial selected value
     const [selectedBrand, setSelectedBrand] = useState('Ford'); // Initial selected value
 
 
 
-    // const notify = () => toast('Here is your toast.')
-    // console.log(id);
+    
     const handleSelectChange = (event) => {
         setSelectedValue(event.target.value);
     };
@@ -33,30 +32,28 @@ const Update = () => {
 
         const updatedUser = { productImg, productName, brandName, typeName, productPrice, productRating };
 
-        fetch(`https://alpha-motors-server.vercel.app/updates/${id}`, {
-            method: 'PATCH',
-            headers: {
-                "content-type": 'application/json'
-            },
-            body: JSON.stringify(updatedUser)
-        }).then(res => res.json())
-            .then(data => {
-                if (data.acknowledged) {
-                    toast.success("Successfully Updated.");
-                }
-            })
+        // fetch(`https://alpha-motors-server.vercel.app/updates/${id}`, {
+        //     method: 'PATCH',
+        //     headers: {
+        //         "content-type": 'application/json'
+        //     },
+        //     body: JSON.stringify(updatedUser)
+        // }).then(res => res.json())
+        //     .then(data => {
+        //         if (data.acknowledged) {
+        //             toast.success("Successfully Updated.");
+        //         }
+        //     })
 
+        console.log(updatedUser);
 
     }
 
-    useEffect(() => {
-
-    }, [])
 
     return (
         <div>
             <div className="md:w-[30%] mx-auto p-5 bg-white border rounded-md shadow-2xl my-10 space-y-5">
-                <h1 className="text-center font-semibold text-xl">Update The Car</h1>
+                <h1 className="text-center font-semibold text-xl">Add New Car</h1>
                 <form className="space-y-3" onSubmit={hadleForm}>
                     <div>
                         <label htmlFor="prodImg">
@@ -78,7 +75,7 @@ const Update = () => {
                             <option value="Nissan">Nissan</option>
                             <option value="Honda">Honda</option>
                             <option value="Jeep">Jeep</option>
-                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="mercedesBenz">Mercedes-Benz</option>
                             <option value="Tesla">Tesla</option>
                             <option value="Toyota">Toyota</option>
                         </select>
@@ -110,7 +107,7 @@ const Update = () => {
                             <input type="text" name="rating" id="rating" placeholder="Input Rating Out Of Five" className="outline-none w-full p-2 rounded-md placeholder:text-gray-300 placeholder:text-sm text-sm required border-2" />
                         </label>
                     </div>
-                    <input onClick={() => { navigate(-1) }} type="submit" value="Update" className="px-4 py-2 
+                    <input  type="submit" value="Add Car" className="px-4 py-2 
                 bg-blue-500 hover:bg-blue-700 
                 active:bg-blue-900 duration-500 rounded 
                 text-white outline-none w-full mt-5"/>
@@ -118,7 +115,7 @@ const Update = () => {
 
 
             </div>
-            <Toaster></Toaster>
+            {/* <Toaster></Toaster>p */}
         </div>
     );
 };

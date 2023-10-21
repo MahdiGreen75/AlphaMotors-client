@@ -22,7 +22,7 @@ const DetailsOfButton = () => {
     const navigate = useNavigate(); 
 
     const addToCart = () => {
-        fetch("http://localhost:5000/carts", {
+        fetch("https://alpha-motors-server.vercel.app/carts", {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

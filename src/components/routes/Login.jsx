@@ -1,29 +1,21 @@
 import { ImCross } from 'react-icons/im';
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from '../../providers/AuthProvider';
-import { FormValidationContext } from "../../Providers/FormValidationProvider";
+import { FormValidationContext } from '../../providers/FormValidationProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 import toast, { Toaster } from 'react-hot-toast';
-import { AuthLocation } from '../../Providers/UseLocation';
 
 const Login = () => {
-    const [value] = useContext(AuthLocation);
     const [validataion, setValidation] = useContext(FormValidationContext)
     const { logIn, signInWithOther } = useContext(AuthContext);
-    const navigate = useNavigate();
     const provider = new GoogleAuthProvider();
-    console.log(value.pathname)
+
     const handleGoogleSignIn = () => {
         signInWithOther(provider)
             .then(() => {
                 console.log("Google sign in successful.")
                 toast.success('Login successful!')
-                if(value.pathname){
-                    navigate(value.pathname)
-                } else {
-                    navigate("/")
-                }
             })
             .catch(() => {
                 setValidation("Can't sign in with google!")
@@ -68,11 +60,6 @@ const Login = () => {
                 setValidation("");
                 console.log("user login successfull", result.user);
                 toast.success('Login successful!')
-                if(value.pathname){
-                    navigate(value.pathname)
-                } else {
-                    navigate("/")
-                }
             })
             .catch(() => {
                 setValidation("Enter email and password correctly.");
@@ -109,7 +96,7 @@ const Login = () => {
 
                 </p>
                 <p className="text-xs font-semibold text-gray-800">
-                    Do not have an account? <Link to={"/register"}>
+                    Do not have an account? <Link to={"/signup"}>
                         <span className="text-blue-400 hover:text-blue-600 active:text-blue-800 duration-300">Register</span>
                     </Link>
                 </p>

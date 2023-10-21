@@ -21,7 +21,7 @@ const ProductDetails = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/${id}`)
+        fetch(`https://alpha-motors-server.vercel.app/${id}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
@@ -29,7 +29,7 @@ const ProductDetails = () => {
     }, [id])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/services`)
+        fetch(`https://alpha-motors-server.vercel.app/services`)
             .then(res => res.json())
             .then(data => {
                 setSlides(data[0][id].slider_img);
@@ -52,13 +52,13 @@ const ProductDetails = () => {
                             modules={[Autoplay, Pagination]}
                             className="mySwiper swiper-banner"
                         >
-                            <SwiperSlide className='relative '>
+                            <SwiperSlide className='relative'>
                                 <img src={slides[0]} />
                             </SwiperSlide>
-                            <SwiperSlide className='relative '>
+                            <SwiperSlide className='relative'>
                                 <img src={slides[1]} />
                             </SwiperSlide>
-                            <SwiperSlide className='relative '>
+                            <SwiperSlide className='relative'>
                                 <img src={slides[2]} />
                             </SwiperSlide>
                         </Swiper>

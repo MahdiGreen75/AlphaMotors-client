@@ -2,10 +2,38 @@ import { BiLogoAdobe } from 'react-icons/bi';
 import { MdOutlineMenu } from 'react-icons/md';
 import { IoCloseSharp } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { FormValidationContext } from '../../providers/FormValidationProvider';
+import { AuthContext } from '../../providers/AuthProvider';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const [validataion, setValidation] = useContext(FormValidationContext);
+    const navigate = useNavigate();
     const [toggleHamburger, setToggleHamBurger] = useState(true);
+
+    const handleLoginAndOut = () => {
+        //login handler
+        if (!user) {
+            navigate("/login");
+        }
+
+        //logout handler
+        if (user) {
+            logOut()
+                .then(() => {
+                    console.log("sign out successfull")
+                    setValidation("");
+                    navigate("/");
+                })
+                .catch(() => console.error("sign out error"))
+
+        }
+    }
+
     return (
         <div>
             <div className='flex justify-between items-center relative'>
@@ -26,13 +54,13 @@ const Navbar = () => {
                             <div>
                                 {
                                     !toggleHamburger && <>
-                                        <nav className='absolute top-12 right-0 bg-blue-500 p-4 rounded-md mr-1 mt-2 duration-500 drop-shadow-2xl'>
-                                            <nav id="sidebar" className='space-y-2 text-xs text-white font-semibold'>
+                                        <nav className='absolute z-50 top-12 right-0 bg-blue-500 p-4 rounded-md mr-1 mt-2 duration-500 drop-shadow-2xl'>
+                                            <nav id="sidebar" className='space-y-2 text-xs text-white font-semibold flex flex-col'>
 
                                                 <NavLink to="/">Home</NavLink>
 
 
-                                                <NavLink>Add Product</NavLink>
+                                                <NavLink to="/addProduct">Add Product</NavLink>
 
 
                                                 <NavLink>My Cart</NavLink>
@@ -47,38 +75,58 @@ const Navbar = () => {
                             </div>
                         </div>
                         <nav className='hidden sm:block'>
-                            <ul className='flex gap-5'>
-                                <li>
-                                    <NavLink>Home</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink>Add Product</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink>My Cart</NavLink>
-                                </li>
-                            </ul>
+                            <nav id="sidebar" className='flex gap-5 '>
+
+                                <NavLink to="/">Home</NavLink>
+
+
+                                <NavLink to="/addProduct">Add Product</NavLink>
+
+
+                                <NavLink>My Cart</NavLink>
+
+
+                                <NavLink to="/signup">Register</NavLink>
+
+                            </nav>
                         </nav>
                     </div>
                     <div className='items-center gap-1 hidden sm:flex'>
-                        <div className='text-2xl border-2'>S</div>
-                        <span className='bg-blue-600 duration-300 
-                    hover:bg-blue-700 rounded-sm
-                    active:bg-blue-800 px-2 py-1 
-                    text-white text-sm font-bold'>
-                            Login
+
+                        {user && <>
+                            <div className='flex text-black text-sm font-bold gap-1'>
+                                {user.photoURL && <>
+                                    <img src={user.photoURL} className='w-6 rounded-full' />
+                                </>}
+                                <span>{user.displayName}</span>
+                            </div>
+                        </>
+                        }
+                        <span>
+                            <button onClick={handleLoginAndOut} className='text-xs sm:text-sm px-3 py-1 bg-blue-500 hover:bg-blue-700 active:bg-blue-800 text-white rounded-sm'>
+                                {user ? "Log Out" : "Log In"}
+                            </button>
                         </span>
                     </div>
                 </div>
             </div>
             <div className='flex justify-center'>
                 <div className='items-center gap-1 flex sm:hidden'>
-                    <div className='text-2xl border-2'>S</div>
-                    <span className='bg-blue-600 duration-300 
-                    hover:bg-blue-700 rounded-sm
-                    active:bg-blue-800 px-2 py-1 
-                    text-white text-sm font-bold'>
-                        Login
+
+                    {user && <>
+                        <div className='flex text-black text-sm font-bold gap-1'>
+                            {user.photoURL && <>
+                                <img src={user.photoURL} className='w-6 rounded-full' />
+                            </>}
+                            <span>{user.displayName}</span>
+                        </div>
+                    </>
+                    }
+
+                    <span>
+                        <button onClick={handleLoginAndOut} className='text-xs sm:text-sm px-3 py-1 bg-blue-500 hover:bg-blue-700 active:bg-blue-800 text-white rounded-sm'>
+                            {user ? "Log Out" : "Log In"}
+                        </button>
                     </span>
                 </div>
             </div>

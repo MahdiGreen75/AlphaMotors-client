@@ -11,9 +11,12 @@ import ProductDetails from './components/routes/ProductDetails';
 import DetailsOfButton from './components/routes/DetailsOfButton';
 import GenericValueProvider from './providers/GenericValueProvider';
 import Update from './components/routes/Update';
-import AuthProvider from './providers/AuthProvider';
-import Login from './components/routes/Login';
+import AddProduct from './components/routes/AddProduct';
+import AuthProvider from './providers/AuthProvider'
+// import Login from './components/routes/Login';
 import SignUp from './components/routes/SignUp';
+import FormValidationProvider from './providers/FormValidationProvider';
+import Login from './components/routes/Login';
 
 const router = createBrowserRouter([
   {
@@ -37,11 +40,15 @@ const router = createBrowserRouter([
         element: <Update></Update>
       },
       {
+        path: "/addProduct",
+        element: <AddProduct></AddProduct>
+      },
+      {
         path: "/login",
         element: <Login></Login>
       },
       {
-        path: "signup",
+        path: "/signup",
         element: <SignUp></SignUp>
       }
     ]
@@ -51,9 +58,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <GenericValueProvider>
-        <RouterProvider router={router} />
-      </GenericValueProvider>
+      <FormValidationProvider>
+        <GenericValueProvider>
+          <RouterProvider router={router} />
+        </GenericValueProvider>
+      </FormValidationProvider>
     </AuthProvider>
   </React.StrictMode>,
 )
