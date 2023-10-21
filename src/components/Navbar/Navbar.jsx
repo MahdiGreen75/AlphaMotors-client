@@ -36,7 +36,7 @@ const Navbar = () => {
     }
 
     return (
-        <div>
+        <div className='mt-2'>
             <div className='flex justify-between items-center relative'>
                 <div className='flex items-center gap-1'>
                     <span><BiLogoAdobe className='text-red-600 text-4xl'></BiLogoAdobe></span>
