@@ -27,7 +27,7 @@ const DetailsOfButton = () => {
     // const [details] = useContext(GenericContext);
     // const [email] = useContext(EmailContext);
     const navigate = useNavigate();
-    console.log(carts, x.state);
+    // console.log(carts, x.state);
     const {
         Year,
         'Vehicle Identification Number (VIN)': VIN,
@@ -56,7 +56,7 @@ const DetailsOfButton = () => {
             .then(data => {
                 console.log(data);
                 if (data.acknowledged) {
-                    navigateHome("/");
+                    navigateHome("/_");
                     toast.success("Insertion Successfull.")
                 }
             })

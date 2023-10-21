@@ -13,7 +13,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 
 const Banner = () => {
     return (
-        <div className='h-52 sm:h-[500px] my-1'>
+        <div className='h-52 sm:h-[500px] my-5'>
             <div id="app">
                 <Swiper
                     pagination={{

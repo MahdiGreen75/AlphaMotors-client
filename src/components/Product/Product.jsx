@@ -3,8 +3,10 @@ import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 // import { GenericContext } from "../../providers/GenericValueProvider";
 import { CartContext } from "../../providers/CartProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Product = ({ product }) => {
+    const {user} = useContext(AuthContext);
     const data = useLocation();
     const [carts, setCarts] = useContext(CartContext);
     const { brand_name, name, price, rating, type, _id, details:singleProduct } = product;
@@ -23,10 +25,10 @@ const Product = ({ product }) => {
                                 <p><span className="text-sm font-bold">Type: </span><span className="font-light">{type}</span></p>
                                 <p><span className="text-sm font-bold">Price: </span><span className="font-light">{price}</span></p>
                                 <p><span className="text-sm font-bold">Rating: </span><span className="font-light">{rating}</span></p>
-                                <Link state={singleProduct} to={`/details/${_id}`}>
+                                <Link state={singleProduct} to={user ? `/details/${_id}` : `/login`}>
                                     <button className="text-sm font-semibold text-white bg-blue-500 hover:bg-blue-700 active:bg-blue-800 rounded-md duration-300 block px-3 py-1">Details</button>
                                 </Link>
-                                <Link to={`/update/${_id}`}>
+                                <Link to={user ? `/update/${_id}` : `/login`}>
                                     <button className="text-sm font-semibold text-white bg-blue-500 hover:bg-blue-700 active:bg-blue-800 rounded-md duration-300 block px-3 py-1">Update</button>
                                 </Link>
                             </div>

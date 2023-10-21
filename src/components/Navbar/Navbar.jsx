@@ -7,6 +7,7 @@ import { FormValidationContext } from '../../providers/FormValidationProvider';
 import { AuthContext } from '../../providers/AuthProvider';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "./Navbar.css";
 
 
 const Navbar = () => {
@@ -60,10 +61,10 @@ const Navbar = () => {
                                                 <NavLink to="/">Home</NavLink>
 
 
-                                                <NavLink to="/addProduct">Add Product</NavLink>
+                                                <NavLink to={user ? `/addProduct` : `/login`}>Add Product</NavLink>
 
 
-                                                <NavLink to="/myCart">My Cart</NavLink>
+                                                <NavLink to={user ? `/myCart` : `/login`}>My Cart</NavLink>
 
 
                                                 <NavLink to="/signup">Register</NavLink>
@@ -80,10 +81,10 @@ const Navbar = () => {
                                 <NavLink to="/">Home</NavLink>
 
 
-                                <NavLink to="/addProduct">Add Product</NavLink>
+                                <NavLink to={user ? `/addProduct` : `/login`}>Add Product</NavLink>
 
 
-                                <NavLink to="/myCart">My Cart</NavLink>
+                                <NavLink to={user ? `/myCart` : `/login`}>My Cart</NavLink>
 
 
                                 <NavLink to="/signup">Register</NavLink>

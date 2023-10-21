@@ -19,11 +19,14 @@ import Login from './components/routes/Login';
 import PrivateRoute from './components/routes/PrivateRoute';
 import MyCart from './components/routes/MyCart';
 import CartProdiver from './providers/CartProvider';
+import ErrorPage from './components/routes/ErrorPage';
+import SuccessMessage from './components/routes/SuccessMessage';
 // import EmailProvider from './providers/EmailProvider';
 
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage></ErrorPage>,
     element: <Home />,
     children: [
       {
@@ -36,15 +39,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <PrivateRoute><DetailsOfButton></DetailsOfButton></PrivateRoute>
+        element: <DetailsOfButton></DetailsOfButton>
       },
       {
         path: "/update/:id",
-        element: <PrivateRoute><Update></Update></PrivateRoute>
+        element: <Update></Update>
       },
       {
         path: "/addProduct",
-        element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
+        element: <AddProduct></AddProduct>
       },
       {
         path: "/login",
@@ -56,7 +59,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/myCart",
-        element: <PrivateRoute><MyCart></MyCart></PrivateRoute>
+        loader: () =>fetch("https://alpha-motors-server.vercel.app/getCart"),
+        element: <MyCart></MyCart>
+      },
+      {
+        path: "/_",
+        element: <SuccessMessage></SuccessMessage>
       }
     ]
   },

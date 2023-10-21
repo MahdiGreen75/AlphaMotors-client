@@ -1,7 +1,7 @@
 // import { useEffect } from "react";
 import { useState } from "react";
 // import { useNavigate, useParams } from "react-router-dom";
-// import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Update = () => {
     // const navigate = useNavigate();
@@ -11,7 +11,7 @@ const Update = () => {
 
 
 
-    
+
     const handleSelectChange = (event) => {
         setSelectedValue(event.target.value);
     };
@@ -32,20 +32,18 @@ const Update = () => {
 
         const updatedUser = { productImg, productName, brandName, typeName, productPrice, productRating };
 
-        // fetch(`https://alpha-motors-server.vercel.app/updates/${id}`, {
-        //     method: 'PATCH',
-        //     headers: {
-        //         "content-type": 'application/json'
-        //     },
-        //     body: JSON.stringify(updatedUser)
-        // }).then(res => res.json())
-        //     .then(data => {
-        //         if (data.acknowledged) {
-        //             toast.success("Successfully Updated.");
-        //         }
-        //     })
+        fetch(`https://alpha-motors-server.vercel.app/addProduct`, {
+            method: 'POST',
+            headers: {
+                "content-type": 'application/json'
+            },
+            body: JSON.stringify(updatedUser)
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
 
-        console.log(updatedUser);
+        // console.log(updatedUser);
 
     }
 
@@ -107,7 +105,7 @@ const Update = () => {
                             <input type="text" name="rating" id="rating" placeholder="Input Rating Out Of Five" className="outline-none w-full p-2 rounded-md placeholder:text-gray-300 placeholder:text-sm text-sm required border-2" />
                         </label>
                     </div>
-                    <input  type="submit" value="Add Car" className="px-4 py-2 
+                    <input type="submit" value="Add Car" className="px-4 py-2 
                 bg-blue-500 hover:bg-blue-700 
                 active:bg-blue-900 duration-500 rounded 
                 text-white outline-none w-full mt-5"/>
@@ -115,7 +113,7 @@ const Update = () => {
 
 
             </div>
-            {/* <Toaster></Toaster>p */}
+            <Toaster></Toaster>p
         </div>
     );
 };
