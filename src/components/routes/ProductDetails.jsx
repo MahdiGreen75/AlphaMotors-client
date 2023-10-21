@@ -19,7 +19,7 @@ const ProductDetails = () => {
     const [products, setProducts] = useState([]);
     const [slides, setSlides] = useState([]);
     const { id } = useParams();
-
+    // console.log(products);
     useEffect(() => {
         fetch(`https://alpha-motors-server.vercel.app/${id}`)
             .then(res => res.json())

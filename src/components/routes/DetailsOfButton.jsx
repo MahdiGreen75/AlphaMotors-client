@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { GenericContext } from "../../providers/GenericValueProvider";
+// import { GenericContext } from "../../providers/GenericValueProvider";
 import { AiOutlineIdcard } from "react-icons/ai"
 import { LiaCalendarTimes } from "react-icons/lia"
 import { AiFillCar } from "react-icons/ai"
@@ -13,28 +13,21 @@ import { ImLifebuoy } from "react-icons/im"
 import { FcBiotech } from "react-icons/fc"
 import { GiHeartInside } from "react-icons/gi"
 import { TbLayoutSidebarRightExpand } from "react-icons/tb"
-import { Link, useNavigate } from "react-router-dom";
-
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
+import { CartContext } from "../../providers/CartProvider";
+// import { EmailContext } from "../../providers/EmailProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const DetailsOfButton = () => {
-    const [detials] = useContext(GenericContext);
-    const navigate = useNavigate(); 
-
-    const addToCart = () => {
-        fetch("https://alpha-motors-server.vercel.app/carts", {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(["user"])
-        })
-        .then(res=>res.json())
-        .then(data=> {
-            console.log(data);
-        })
-    }
-
+    const navigateHome = useNavigate();
+    const { user } = useContext(AuthContext);
+    const x = useLocation();
+    const [carts] = useContext(CartContext);
+    // const [details] = useContext(GenericContext);
+    // const [email] = useContext(EmailContext);
+    const navigate = useNavigate();
+    console.log(carts, x.state);
     const {
         Year,
         'Vehicle Identification Number (VIN)': VIN,
@@ -49,7 +42,26 @@ const DetailsOfButton = () => {
         'Entertainment and Technology': entertainmentTech,
         'Interior Features': interiorFeatures,
         'Exterior Features': exteriorFeatures,
-    } = detials
+    } = x.state;
+
+    const hadleAddToCart = () => {
+        fetch("https://alpha-motors-server.vercel.app/carts", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ [user.email]: carts })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    navigateHome("/");
+                    toast.success("Insertion Successfull.")
+                }
+            })
+    }
+
 
     return (
 
@@ -125,12 +137,13 @@ const DetailsOfButton = () => {
             </div>
             <div className="flex flex-row-reverse justify-center items-center my-5 gap-2">
                 <Link>
-                    <button className="text-white font-sm font-semibold bg-blue-500 duration-300  hover:bg-blue-700 active:bg-blue-900 rounded-md px-3 py-1">Add to cart</button>
+                    <button onClick={hadleAddToCart} className="text-white font-sm font-semibold bg-blue-500 duration-300  hover:bg-blue-700 active:bg-blue-900 rounded-md px-3 py-1">Add to cart</button>
                 </Link>
                 <span>
-                    <button onClick={()=>{navigate(-1)}} className="text-white font-sm font-semibold bg-blue-500 duration-300  hover:bg-blue-700 active:bg-blue-900 rounded-md px-3 py-1">Go back</button>
+                    <button onClick={() => { navigate(-1) }} className="text-white font-sm font-semibold bg-blue-500 duration-300  hover:bg-blue-700 active:bg-blue-900 rounded-md px-3 py-1">Go back</button>
                 </span>
             </div>
+            <Toaster></Toaster>
         </>
     );
 };

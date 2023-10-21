@@ -47,7 +47,6 @@ const SignUp = () => {
             return;
         }
 
-
         userSignUp(email, password)
             .then(result => {
                 console.log("sign up is successful", result.user);

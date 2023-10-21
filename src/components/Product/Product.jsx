@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { GenericContext } from "../../providers/GenericValueProvider";
+import { Link, useLocation } from "react-router-dom";
+// import { GenericContext } from "../../providers/GenericValueProvider";
+import { CartContext } from "../../providers/CartProvider";
 
 const Product = ({ product }) => {
-
-    const [xdetails, setSDetails] = useContext(GenericContext);
-    const { brand_name, name, price, rating, type, _id, details } = product;
-    // console.log(_id)
-    setSDetails(details);
+    const data = useLocation();
+    const [carts, setCarts] = useContext(CartContext);
+    const { brand_name, name, price, rating, type, _id, details:singleProduct } = product;
+    setCarts({ brand_name, name, price, rating, type, _id});
+    
     return (
         <div>
             <Link to=''>
@@ -22,7 +23,7 @@ const Product = ({ product }) => {
                                 <p><span className="text-sm font-bold">Type: </span><span className="font-light">{type}</span></p>
                                 <p><span className="text-sm font-bold">Price: </span><span className="font-light">{price}</span></p>
                                 <p><span className="text-sm font-bold">Rating: </span><span className="font-light">{rating}</span></p>
-                                <Link to={`/details/${_id}`}>
+                                <Link state={singleProduct} to={`/details/${_id}`}>
                                     <button className="text-sm font-semibold text-white bg-blue-500 hover:bg-blue-700 active:bg-blue-800 rounded-md duration-300 block px-3 py-1">Details</button>
                                 </Link>
                                 <Link to={`/update/${_id}`}>

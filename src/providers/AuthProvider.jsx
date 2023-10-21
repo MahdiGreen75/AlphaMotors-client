@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
         userSignUp,
         signInWithOther,
         logIn,
-        logOut,
+        logOut
     }
 
     return (

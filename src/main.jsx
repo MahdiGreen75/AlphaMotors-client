@@ -13,10 +13,13 @@ import GenericValueProvider from './providers/GenericValueProvider';
 import Update from './components/routes/Update';
 import AddProduct from './components/routes/AddProduct';
 import AuthProvider from './providers/AuthProvider'
-// import Login from './components/routes/Login';
 import SignUp from './components/routes/SignUp';
 import FormValidationProvider from './providers/FormValidationProvider';
 import Login from './components/routes/Login';
+import PrivateRoute from './components/routes/PrivateRoute';
+import MyCart from './components/routes/MyCart';
+import CartProdiver from './providers/CartProvider';
+// import EmailProvider from './providers/EmailProvider';
 
 const router = createBrowserRouter([
   {
@@ -33,15 +36,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <DetailsOfButton></DetailsOfButton>
+        element: <PrivateRoute><DetailsOfButton></DetailsOfButton></PrivateRoute>
       },
       {
         path: "/update/:id",
-        element: <Update></Update>
+        element: <PrivateRoute><Update></Update></PrivateRoute>
       },
       {
         path: "/addProduct",
-        element: <AddProduct></AddProduct>
+        element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
       },
       {
         path: "/login",
@@ -50,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>
+      },
+      {
+        path: "/myCart",
+        element: <PrivateRoute><MyCart></MyCart></PrivateRoute>
       }
     ]
   },
@@ -60,7 +67,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthProvider>
       <FormValidationProvider>
         <GenericValueProvider>
-          <RouterProvider router={router} />
+          <CartProdiver>
+            <RouterProvider router={router} />
+          </CartProdiver>
         </GenericValueProvider>
       </FormValidationProvider>
     </AuthProvider>

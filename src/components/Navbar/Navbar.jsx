@@ -63,7 +63,7 @@ const Navbar = () => {
                                                 <NavLink to="/addProduct">Add Product</NavLink>
 
 
-                                                <NavLink>My Cart</NavLink>
+                                                <NavLink to="/myCart">My Cart</NavLink>
 
 
                                                 <NavLink to="/signup">Register</NavLink>
@@ -83,7 +83,7 @@ const Navbar = () => {
                                 <NavLink to="/addProduct">Add Product</NavLink>
 
 
-                                <NavLink>My Cart</NavLink>
+                                <NavLink to="/myCart">My Cart</NavLink>
 
 
                                 <NavLink to="/signup">Register</NavLink>
