@@ -6,7 +6,8 @@ Welcome to the Awesome React Firebase Tailwind Project! It is named AlphaMotor. 
 
 ## Live Project
 
-You can experience the project live by visiting the following link: [https://alphamotor-85ae6.web.app/](#)
+You can experience the project live by visiting the following link: [https://alphamotor-85ae6.web.app/](#) <br/>
+[click here to visit server side github repo](https://github.com/MahdiGreen75/AlphaMotors-server-v2)
 
 ## Project Features
 
